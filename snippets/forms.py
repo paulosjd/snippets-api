@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.forms import ModelForm, ModelChoiceField
 
 from snippets.models.topic import Topic

@@ -1,7 +1,8 @@
+# coding=utf-8
 from django.contrib import admin
 
 from snippets.forms import MdSegmentAdminForm
-from snippets.models import MarkdownSegment, Topic, Category
+from snippets.models import Category, MarkdownSegment, Topic
 
 
 class MarkdownTopicFilter(admin.SimpleListFilter):
