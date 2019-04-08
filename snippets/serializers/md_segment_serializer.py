@@ -1,17 +1,11 @@
+# coding=utf-8
 from rest_framework import serializers
-from snippets.models import MarkdownPage, MarkdownSegment
+from snippets.models import MarkdownSegment
 
 
 class MarkdownSegmentSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = MarkdownPage
-        fields = ('term', )
+        model = MarkdownSegment
+        fields = ('order', 'keywords', 'content')
 
-
-class CompoundSerializer(serializers.ModelSerializer):
-    odor_categories = OdorTypeSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Odorant
-        fields = ('cas_number', 'smiles', 'iupac_name', 'chemical_name', 'chemical_properties', 'odor_categories', )

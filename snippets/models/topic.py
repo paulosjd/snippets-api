@@ -1,28 +1,26 @@
-from django.contrib.postgres.fields import ArrayField
+# coding=utf-8
 from django.db import models
-from django.urls import reverse
-from django.utils.text import slugify
+
+from snippets.models.category import Category
 
 
 class Topic(models.Model):
 
     name = models.CharField(
         max_length=40,
-        help_text='e.g. Django',
+        unique=True,
+    )
+    slug = models.CharField(
+        max_length=40,
         db_index=True,
+        unique=True,
     )
-    logo = models.CharField(
-        max_length=100,
-        null=True,
-        blank=True,
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='topics',
     )
+    # objects = SubTopicManager()
 
     def __str__(self):
-        return '(Topic) {}'.format(self.name)
-
-    def get_absolute_url(self):
-        return reverse(
-            'bioactive-actions',
-            kwargs={'action': slugify(self.name)}
-        )
-
+        return self.name
