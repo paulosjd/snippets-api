@@ -38,9 +38,23 @@ class MarkdownSegmentAdmin(admin.ModelAdmin):
         return '{} - {} - {}'.format(obj.topic.category.name, obj.topic.name, obj.name)
 
 
+class TopicCategoryFilter(admin.SimpleListFilter):
+    title = 'Category'
+    parameter_name = 'id'
+
+    def lookups(self, request, model_admin):
+        return [(a.id, a.name) for a in Category.objects.order_by('name').distinct()]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(category__id=self.value())
+        return queryset.all()
+
+
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
     list_display = ('get_object_display', )
+    list_filter = [TopicCategoryFilter]
 
     def get_object_display(self, obj):
         return '{} - {}'.format(obj.category.name, obj.name)
