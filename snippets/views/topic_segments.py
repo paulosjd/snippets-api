@@ -17,5 +17,4 @@ class TopicSegmentsView(ListAPIView):
         return super(TopicSegmentsView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        queryset = MarkdownSegment.objects
-        return queryset.filter(topic__slug=self.topic_name).order_by('order').all()
+        return self.queryset.filter(topic__slug=self.topic_name).order_by('order').all()

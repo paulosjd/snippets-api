@@ -7,13 +7,17 @@ from snippets.models.category import Category
 class Topic(models.Model):
 
     name = models.CharField(
-        max_length=40,
+        max_length=20,
         unique=True,
     )
     slug = models.CharField(
         max_length=40,
         db_index=True,
         unique=True,
+    )
+    completed = models.BooleanField(
+        default=False,
+        help_text='All content from existing md file'
     )
     category = models.ForeignKey(
         Category,

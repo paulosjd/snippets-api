@@ -53,7 +53,7 @@ class TopicCategoryFilter(admin.SimpleListFilter):
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ('get_object_display', )
+    list_display = ('get_object_display', 'slug', 'completed')
     list_filter = [TopicCategoryFilter]
 
     def get_object_display(self, obj):

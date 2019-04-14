@@ -2,12 +2,15 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from snippets.views import CategoriesListView, TopicSegmentsView, schema_view
+from snippets.views import (
+    CategoriesListView, TextSearchResultsView, TopicSegmentsView, schema_view
+)
 
 
 urlpatterns = [
     path('categories', CategoriesListView.as_view()),
     path('topics/<slug>', TopicSegmentsView.as_view()),
+    path('search/<text>', TextSearchResultsView.as_view()),
     path('docs/', schema_view),
 ]
 
